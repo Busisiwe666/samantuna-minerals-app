@@ -129,7 +129,7 @@ def mineral_profile(mineral_name):
         price=info['MarketPriceUSD_per_tonne']
     )
 
-# -------------------- PRODUCTION --------------------
+#  PRODUCTION 
 @app.route('/production')
 @login_required
 def production_list():
@@ -152,7 +152,7 @@ def production_chart():
     chart_html = fig.to_html(full_html=False)
     return render_template('chart.html', chart=chart_html)
 
-# -------------------- MAP --------------------
+# Map
 @app.route('/map')
 @login_required
 def map_view():
