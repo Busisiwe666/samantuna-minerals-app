@@ -1,0 +1,5 @@
+CountryID,CountryName,GDP_BillionUSD,MiningRevenue_BillionUSD,KeyProjects,Latitude,Longitude
+1,DRC (Congo),55,12,"Cobalt expansion in Kolwezi",-11.67,27.48
+2,South Africa,350,25,"Bushveld Lithium Project",-30.0,24.0
+3,Mozambique,20,4,"Balama Graphite Project",-18.67,35.53
+4,Namibia,15,3,"Otjozondu Manganese Project",-22.57,17.08

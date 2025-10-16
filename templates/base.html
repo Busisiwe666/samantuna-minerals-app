@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title or "SAMANTUNA MINERALS APP" }}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+  <style>
+    /* -------- ACCESSIBILITY STYLES -------- */
+    :focus {
+      outline: 3px solid #0d6efd !important;
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      background: #ffbf00;
+      color: #000;
+      padding: 10px;
+      font-weight: bold;
+      z-index: 1000;
+    }
+    .skip-link:focus {
+      left: 10px;
+      top: 10px;
+    }
+
+    .high-contrast, .high-contrast * {
+      background: #000 !important;
+      color: #fff !important;
+      border-color: #fff !important;
+    }
+
+    a.btn, button {
+      padding: 12px 20px !important;
+      border-radius: 8px;
+      min-height: 45px;
+      font-size: 1rem;
+    }
+
+    .card {
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+      transition: 0.3s ease;
+    }
+
+    .caption-box {
+      background: #fff;
+      border-left: 4px solid #0d6efd;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    .visually-hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip link for keyboard users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation" aria-label="Main navigation">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/dashboard" aria-label="SAMANTUNA MINERALS APP Dashboard"> SAMANTUNA MINERALS APP</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
+              aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/countries">Countries</a></li>
+          <li class="nav-item"><a class="nav-link" href="/minerals">Minerals</a></li>
+          <li class="nav-item"><a class="nav-link" href="/production">Production</a></li>
+          <li class="nav-item"><a class="nav-link" href="/map">Map</a></li>
+          <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ACCESSIBILITY TOOLBAR -->
+  <div class="text-center p-2 bg-light border-bottom" aria-label="Accessibility controls">
+    <button id="ttsBtn" class="btn btn-outline-dark btn-sm me-2" aria-label="Read page aloud"> Read Aloud</button>
+    <button id="contrastBtn" class="btn btn-outline-dark btn-sm me-2" aria-label="Toggle high contrast"> High Contrast</button>
+    <button id="captionsBtn" class="btn btn-outline-dark btn-sm me-2" aria-label="Toggle captions"> Captions</button>
+    <button id="voiceBtn" class="btn btn-outline-dark btn-sm me-2" aria-label="Voice commands"> Voice</button>
+    <span class="text-muted small">Shortcut Keys: Alt+1–5 | Alt+0 Logout</span>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content" tabindex="-1" class="container mt-4">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- CAPTIONS BOX -->
+  <div id="captionArea" class="caption-box visually-hidden" aria-live="polite">
+    <strong>Captions:</strong>
+    <p>This page supports reading aloud, captions, and voice control. Use Tab and Enter keys for navigation.</p>
+  </div>
+
+  <!-- ALERTS AREA -->
+  <div id="alerts" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- FOOTER -->
+  <footer class="text-center text-muted py-3">
+    <small>© 2025 SAMANTUNA MINERALS APP | Accessibility Enabled</small>
+  </footer>
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ACCESSIBILITY SCRIPTS -->
+  <script>
+    // ----------- TEXT TO SPEECH (TTS) -----------
+    const ttsBtn = document.getElementById('ttsBtn');
+    let speaking = false;
+    ttsBtn?.addEventListener('click', () => {
+      const synth = window.speechSynthesis;
+      if (speaking) {
+        synth.cancel();
+        ttsBtn.textContent = '🔊 Read Aloud';
+        speaking = false;
+        return;
+      }
+      const text = document.body.innerText;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      synth.speak(utterance);
+      ttsBtn.textContent = '⏹ Stop Reading';
+      speaking = true;
+      utterance.onend = () => {
+        ttsBtn.textContent = '🔊 Read Aloud';
+        speaking = false;
+      };
+    });
+
+    // ----------- HIGH CONTRAST -----------
+    const contrastBtn = document.getElementById('contrastBtn');
+    contrastBtn?.addEventListener('click', () => {
+      document.body.classList.toggle('high-contrast');
+      showAlert(document.body.classList.contains('high-contrast') ? 'High contrast mode enabled' : 'Normal mode restored');
+    });
+
+    // ----------- CAPTIONS -----------
+    const captionsBtn = document.getElementById('captionsBtn');
+    const captionArea = document.getElementById('captionArea');
+    captionsBtn?.addEventListener('click', () => {
+      captionArea.classList.toggle('visually-hidden');
+      showAlert(captionArea.classList.contains('visually-hidden') ? 'Captions hidden' : 'Captions shown');
+    });
+
+    // ----------- VOICE COMMANDS -----------
+    const voiceBtn = document.getElementById('voiceBtn');
+    voiceBtn?.addEventListener('click', () => {
+      if (!('webkitSpeechRecognition' in window)) {
+        showAlert('Voice recognition not supported in this browser');
+        return;
+      }
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.start();
+      showAlert('🎙️ Listening... say commands like "open minerals" or "logout"');
+      recognition.onresult = (event) => {
+        const command = event.results[0][0].transcript.toLowerCase();
+        console.log('Command:', command);
+        if (command.includes('minerals')) location.href = '/minerals';
+        else if (command.includes('countries')) location.href = '/countries';
+        else if (command.includes('production')) location.href = '/production';
+        else if (command.includes('map')) location.href = '/map';
+        else if (command.includes('dashboard')) location.href = '/dashboard';
+        else if (command.includes('upload')) location.href = '/upload';
+        else if (command.includes('logout')) location.href = '/logout';
+        else showAlert('Command not recognized');
+      };
+      recognition.onerror = () => showAlert('Voice command failed');
+    });
+
+    // ----------- KEYBOARD SHORTCUTS -----------
+    document.addEventListener('keydown', (e) => {
+      if (e.altKey && e.key === '1') location.href = '/dashboard';
+      if (e.altKey && e.key === '2') location.href = '/minerals';
+      if (e.altKey && e.key === '3') location.href = '/countries';
+      if (e.altKey && e.key === '4') location.href = '/production';
+      if (e.altKey && e.key === '5') location.href = '/map';
+      if (e.altKey && e.key === '0') location.href = '/logout';
+    });
+
+    // ----------- ALERT FEEDBACK -----------
+    function showAlert(msg) {
+      const alerts = document.getElementById('alerts');
+      alerts.innerHTML = `<div class="alert alert-info p-2 shadow-sm">${msg}</div>`;
+      setTimeout(() => (alerts.innerHTML = ''), 2500);
+    }
+  </script>
+</body>
+</html>

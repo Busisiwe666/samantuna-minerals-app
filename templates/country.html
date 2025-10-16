@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center">
+  {% if error %}<div class="alert alert-danger">{{ error }}</div>
+  {% else %}
+  <h2>{{ country }}</h2>
+  <div class="card mx-auto shadow-sm" style="max-width:600px;">
+    <div class="card-body">
+      <p><strong>GDP:</strong> {{ gdp }} Billion USD</p>
+      <p><strong>Mining Revenue:</strong> {{ revenue }} Billion USD</p>
+      <p><strong>Key Projects:</strong> {{ project }}</p>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

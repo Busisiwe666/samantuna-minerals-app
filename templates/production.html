@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-center mb-4">Production Statistics</h2>
+<div class="table-responsive shadow-sm">
+  <table class="table table-hover table-striped">
+    <thead class="table-dark">
+      <tr><th>Year</th><th>Country</th><th>Mineral</th><th>Production (tonnes)</th><th>Export Value (B USD)</th></tr>
+    </thead>
+    <tbody>
+      {% for p in production %}
+      <tr>
+        <td>{{ p.Year }}</td>
+        <td>{{ p.Country }}</td>
+        <td>{{ p.Mineral }}</td>
+        <td>{{ "{:,}".format(p["Production (tonnes)"]) }}</td>
+        <td>{{ "%.2f"|format(p["Export Value (Billion USD)"]) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="text-center mt-4"><a class="btn btn-primary" href="/chart">View Chart</a></div>
+{% endblock %}

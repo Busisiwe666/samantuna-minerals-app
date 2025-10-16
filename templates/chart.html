@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-center mb-4">Charts</h2>
+<div class="shadow-sm p-3 bg-light rounded">
+  {{ chart|safe }}
+</div>
+<div class="text-center mt-3"><a class="btn btn-outline-secondary" href="/production">Back to table</a></div>
+{% endblock %}
+

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-center mb-4">Countries</h2>
+<div class="row g-4 justify-content-center">
+  {% for c in countries %}
+  <div class="col-md-3 col-sm-6">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ c.CountryName }}</h5>
+        <p class="small text-muted">GDP: {{ c.GDP_BillionUSD }} B | Mining Rev: {{ c.MiningRevenue_BillionUSD }} B</p>
+        <a class="btn btn-outline-primary w-100" href="/country/{{ c.CountryName }}">View</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center">
+  <h1 class="mb-3">SAMANTUNA MINERALS APP</h1>
+  <p class="text-muted">Welcome, <strong>{{ user }}</strong> ({{ role }})</p>
+
+  <div class="row g-4 justify-content-center mt-4">
+    <div class="col-md-3 col-sm-6">
+      <div class="card h-100 shadow-sm">
+        <img src="https://cdn-icons-png.flaticon.com/512/3115/3115182.png" class="card-img-top p-4" alt="minerals icon" style="height:140px; object-fit:contain;">
+        <div class="card-body">
+          <h5 class="card-title">Minerals</h5>
+          <p class="small text-muted">View minerals & market prices</p>
+          <a class="btn btn-success w-100" href="/minerals">Open Minerals</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="card h-100 shadow-sm">
+        <img src="https://cdn-icons-png.flaticon.com/512/1975/1975660.png" class="card-img-top p-4" alt="countries icon" style="height:140px; object-fit:contain;">
+        <div class="card-body">
+          <h5 class="card-title">Countries</h5>
+          <p class="small text-muted">GDP & key projects</p>
+          <a class="btn btn-info w-100" href="/countries">Open Countries</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="card h-100 shadow-sm">
+        <img src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png" class="card-img-top p-4" alt="production icon" style="height:140px; object-fit:contain;">
+        <div class="card-body">
+          <h5 class="card-title">Production Stats</h5>
+          <p class="small text-muted">Production & export statistics</p>
+          <a class="btn btn-primary w-100" href="/production">Open Production</a>
+        </div>
+      </div>
+    </div>
+
+    {% if role == 'Admin' %}
+    <div class="col-md-3 col-sm-6">
+      <div class="card h-100 shadow-sm border-danger">
+        <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" class="card-img-top p-4" alt="admin icon" style="height:140px; object-fit:contain;">
+        <div class="card-body">
+          <h5 class="card-title text-danger">Admin</h5>
+          <p class="small text-muted">Upload / update datasets</p>
+          <a class="btn btn-danger w-100" href="/upload">Manage Data</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

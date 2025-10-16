@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-center mb-4">Minerals</h2>
+<div class="row g-4 justify-content-center">
+  {% for m in minerals %}
+  <div class="col-md-3 col-sm-6">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ m.MineralName }}</h5>
+        <p class="small text-muted">{{ m.Description }}</p>
+        <p class="fw-bold">${{ "{:,}".format(m.MarketPriceUSD_per_tonne) }} / tonne</p>
+        <a class="btn btn-outline-success w-100" href="/mineral/{{ m.MineralName }}">Details</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

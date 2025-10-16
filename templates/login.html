@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <div class="card p-4 shadow-sm">
+      <h3 id="loginHeading" class="text-center">Sign-In</h3>
+      <form action="/login" method="post" aria-labelledby="loginHeading">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input id="username" name="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Access Code</label>
+          <input id="password" name="password" type="password" class="form-control" required>
+        </div>
+        <button class="btn btn-dark w-100">Sign-In</button>
+      </form>
+      {% if error %}<div class="text-danger mt-2" role="alert">{{ error }}</div>{% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
