@@ -1,0 +1,41 @@
+# Samantuna Chrono Minerals Application
+
+## Overview
+The Samantuna Chrono Minerals Application is a web-based platform that centralizes and visualizes Africa’s critical mineral resources, including lithium, cobalt, graphite, and manganese. It helps users explore interactive maps, charts, and country profiles to understand mineral data for research, investment, and administration.
+
+## Purpose
+- **Researchers:** Access and analyze mineral production, distribution, and trends.  
+- **Investors:** Identify opportunities and assess resources efficiently.  
+- **Administrators:** Manage, update, and maintain mineral data.
+
+## Features
+-Role-based access control for investors, researchers, and administrators  
+-Interactive country profiles, dashboards, and maps  
+-Python-based dynamic graphs and charts (Flask, Pandas, Plotly, Folium)  
+-Accessibility features include contrast adjustments, text-to-speech, voice control, and captions
+-A user-friendly interface for rapid data exploration
+
+## Installation
+1. Clone the repository:  
+   ```bash
+   git clone <repository-url>
+2.Set up dependencies:
+pip install -r requirements.txt
+3.Run the app:
+python app.py
+4.Open your browser
+
+Contributions
+
+ Busisiwe Maite: Designing dashboards  and interactive maps
+ Khodani Sadiki: Testing ,accessibility features and Creating Dynamic Charts.
+ Okuhle Ntuna:Gathering, displaying, and recording data
+ Pontsho Nala: Database integration, , and backend.
+              -Flask installation,Enviroment activation and creation
+
+Future Improvements
+Login using facial recognition for increased security
+Updates on mineral production in real time
+Interface that is responsive to mobile devices
+Tools for advanced analytics for researchers and investors
+
